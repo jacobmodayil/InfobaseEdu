@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 
 /* GET category by ID. */
 router.get('/:id', function(req, res, next) {
-  Categories.getCategoryById(req.params.id,function(err, category){
+  Category.getCategoryById(req.params.id,function(err, category){
   if(err)
   {
     console.log(err);
@@ -26,5 +26,38 @@ router.get('/:id', function(req, res, next) {
 })
 });
 
+// Create category
+router.post('/', function(req, res, next){
+  //Get form values
+  var name = req.body.name;
+  var description = req.body.description;
 
+  // Category object
+  var newCategory = new Category({
+    name: name,
+    description: description
+  });
+
+  Category.createCategory(newCategory, function(err, article){
+    if(err){
+      Console.log(err);
+    }
+    res.location('/categories');
+    res.redirect('/categories');
+  });
+});
+
+// Delete category
+router.delete('/:id', function(req, res, next){
+  //Get form values
+  var id = req.body.id;
+  //Delete category
+  Article.removeCategory(id, function(err, category){
+    if(err){
+      Console.log(err);
+    }
+    res.location('/categories');
+    res.redirect('/categories');
+  });
+});
 module.exports = router;

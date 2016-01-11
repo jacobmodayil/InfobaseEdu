@@ -26,7 +26,12 @@ module.exports.getCategoryById = function(id, callback){
   Category.findById(id, callback);
 }
 
-// Post a new category
+// Add a new category
 module.exports.createCategory = function(newCategory, callback){
   newCategory.save(callback);
+}
+
+// Remove a category
+module.exports.removeCategory = function(id, callback){
+  Category.find({_id: id}).remove(callback);
 }
