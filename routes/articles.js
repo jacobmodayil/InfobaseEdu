@@ -62,7 +62,7 @@ router.post('/', function(req, res, next){
 });
 
 // Update article
-router.put('/:id', function(req, res, next){
+router.put('/', function(req, res, next){
   //Get form values
   var id = req.body.id;
   var data = {
@@ -83,7 +83,7 @@ router.put('/:id', function(req, res, next){
 // Delete article
 router.delete('/:id', function(req, res, next){
   //Get form values
-  var id = req.body.id;
+  var id = req.params.id;
   //Delete article
   Article.removeArticle(id, function(err, article){
     if(err){
